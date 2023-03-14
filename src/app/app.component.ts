@@ -11,15 +11,13 @@ export class AppComponent {
   public latitude?: number;
 
   constructor(private readonly geolocationService: GeolocationService) {
-    geolocationService
-      .getPosition()
-      .subscribe({
-        next: pos =>
-          ([this.longitude, this.latitude] = [
-            pos.coords.longitude,
-            pos.coords.latitude,
-          ]),
-        error: e => console.log(e),
-      });
+    geolocationService.getPosition().subscribe({
+      next: pos =>
+        ([this.longitude, this.latitude] = [
+          pos.coords.longitude,
+          pos.coords.latitude,
+        ]),
+      error: e => console.log(e),
+    });
   }
 }
