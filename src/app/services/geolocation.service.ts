@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -5,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GeolocationService {
-  constructor() {}
+  constructor(private readonly http: HttpClient) {}
 
   public getPosition(): Observable<any> {
     return new Observable(observer => {
@@ -17,5 +18,16 @@ export class GeolocationService {
         error => observer.error(error)
       );
     });
+  }
+
+  public getPositionByName(cityName: string): Observable<any> {
+    return this.http.get(
+      `https://api.api-ninjas.com/v1/geocoding?city=${cityName}`,
+      {
+        headers: {
+          'X-Api-Key': 'vgHPjCHkCUpzsSUow/ql9A==XhldppMUxHsxsqJw',
+        },
+      }
+    );
   }
 }
