@@ -1,0 +1,29 @@
+<div class="location-cmpnt-wrapper">
+  <div
+    class="location-cmpnt-content"
+    *ngIf="!isUserAllowedLocationAccess && isChoiceMade">
+    <form class="city-input-form">
+      <mat-form-field class="city-input">
+        <mat-label>Type location name</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="cityFormControl"
+          placeholder="City name" />
+        <mat-error *ngIf="cityFormControl.hasError('required')">
+          City name is <strong>required</strong> since your declined access to
+          your location
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <div class="location-cmpnt-search-btn">
+      <button
+        class="location-search-btn"
+        mat-flat-button
+        color="primary"
+        (click)="onBtnClick()">
+        Search
+      </button>
+    </div>
+  </div>
+</div>
